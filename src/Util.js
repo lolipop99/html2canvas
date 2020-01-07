@@ -25,6 +25,7 @@ window.html2canvas = function(elements, opts) {
 
     width: null,
     height: null,
+    scale: 1,
     taintTest: true, // do a taint test with all images before applying to canvas
     renderer: "Canvas"
   };

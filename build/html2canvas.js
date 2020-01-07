@@ -1,6 +1,6 @@
 /*
   html2canvas 0.4.1 <http://html2canvas.hertzen.com>
-  Copyright (c) 2013 Niklas von Hertzen
+  Copyright (c) 2020 Niklas von Hertzen
 
   Released under MIT License
 */
@@ -2683,6 +2683,7 @@ window.html2canvas = function(elements, opts) {
 
     width: null,
     height: null,
+    scale: 1,
     taintTest: true, // do a taint test with all images before applying to canvas
     renderer: "Canvas"
   };
@@ -2808,13 +2809,19 @@ _html2canvas.Renderer.Canvas = function(options) {
     var ctx = canvas.getContext("2d"),
     newCanvas,
     bounds,
+    boundScaleKeys,
     fstyle,
     zStack = parsedData.stack;
 
-    canvas.width = canvas.style.width =  options.width || zStack.ctx.width;
-    canvas.height = canvas.style.height = options.height || zStack.ctx.height;
+    if (options.dpi) {
+      options.scale = options.dpi / 96;
+    }
+
+    canvas.width = canvas.style.width =  (options.width || zStack.ctx.width) * options.scale;
+    canvas.height = canvas.style.height = (options.height || zStack.ctx.height) * options.scale;
 
     fstyle = ctx.fillStyle;
+    ctx.scale(options.scale, options.scale);
     ctx.fillStyle = (Util.isTransparent(zStack.backgroundColor) && options.background !== undefined) ? options.background : parsedData.backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = fstyle;
@@ -2845,17 +2852,25 @@ _html2canvas.Renderer.Canvas = function(options) {
       ctx.restore();
     });
 
-    Util.log("html2canvas: Renderer: Canvas renderer done - returning canvas obj");
+    Util.log("html2canvas: Renderer: Canvas renderer done, scaled at " + options.scale + " - returning canvas obj");
 
     if (options.elements.length === 1) {
       if (typeof options.elements[0] === "object" && options.elements[0].nodeName !== "BODY") {
         // crop image to the bounds of selected (single) element
         bounds = _html2canvas.Util.Bounds(options.elements[0]);
+        boundScaleKeys = ['width', 'height', 'top', 'left'];
+
+        boundScaleKeys.forEach(function(key) {
+          bounds[key] = bounds[key] * options.scale;
+        });
+
         newCanvas = document.createElement('canvas');
         newCanvas.width = Math.ceil(bounds.width);
         newCanvas.height = Math.ceil(bounds.height);
-        ctx = newCanvas.getContext("2d");
+        newCanvas.style.width = newCanvas.width + 'px';
+        newCanvas.style.height = newCanvas.height + 'px';
 
+        ctx = newCanvas.getContext("2d");
         ctx.drawImage(canvas, bounds.left, bounds.top, bounds.width, bounds.height, 0, 0, bounds.width, bounds.height);
         canvas = null;
         return newCanvas;

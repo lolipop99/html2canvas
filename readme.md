@@ -1,8 +1,25 @@
-html2canvas
+html2canvas-dpi
 ===========
 
-### Current build status ###
-[![Build Status](https://travis-ci.org/niklasvh/html2canvas.png)](https://travis-ci.org/niklasvh/html2canvas)
+This is a fork of html2canvas@0.4.1 with scale and dpi features added in.
+
+    html2canvas(document.body, {
+        dpi: 300, // print ready capture
+        onrendered: function(canvas) {
+            /* canvas is the actual canvas element,
+               to append it to the page call for example
+               document.body.appendChild( canvas );
+            */
+        }
+    });
+
+
+#### Why is this a fork?
+I was having difficulty with performance using any version of html2canvas greater than 0.4.1
+and needed a quick fix that also allowed for high quality captures. Thus I rolled back to v0.4.1
+and added in the scale/dpi features for this version.
+
+-----
 
 #### JavaScript HTML renderer ####
 
