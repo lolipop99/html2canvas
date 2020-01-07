@@ -20,6 +20,9 @@ and needed a quick fix that also allowed for high quality captures. Thus I rolle
 and added in the scale/dpi features for this version and re-released as I knew this wouldn't get merged in as a PR
 as html2canvas has had 2 full rewrites since this version released.
 
+#### Installing
+    $ npm i --save html2canvas-dpi
+
 -----
 
 #### JavaScript HTML renderer ####
@@ -97,6 +100,9 @@ For more information and examples, please visit the [homepage](http://html2canva
 If you wish to contribute to the project, please send the pull requests to the develop branch. Before submitting any changes, try and test that the changes work with all the support browsers. If some CSS property isn't supported or is incomplete, please create appropriate tests for it as well before submitting any code changes.
 
 ### Changelog ###
+
+v0.4.2 - 7.1.2020
+ * Added scale and dpi canvas render functionality
 
 v0.4.1 - 7.9.2013
  * Added support for bower

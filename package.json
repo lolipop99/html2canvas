@@ -44,6 +44,7 @@
     "build": "grunt build"
   },
   "homepage": "http://html2canvas.hertzen.com",
+  "license": "MIT",
   "licenses": [
     {
       "type": "MIT"
