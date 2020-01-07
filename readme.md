@@ -14,10 +14,11 @@ This is a fork of html2canvas@0.4.1 with scale and dpi features added in.
     });
 
 
-#### Why is this a fork?
+#### Why split this out from html2canvas?
 I was having difficulty with performance using any version of html2canvas greater than 0.4.1
 and needed a quick fix that also allowed for high quality captures. Thus I rolled back to v0.4.1
-and added in the scale/dpi features for this version.
+and added in the scale/dpi features for this version and re-released as I knew this wouldn't get merged in as a PR
+as html2canvas has had 2 full rewrites since this version released.
 
 -----
 
@@ -34,7 +35,7 @@ It doesn't magically circumvent any browser content policy restrictions either, 
 
 The script is still in a **very experimental state**, so I don't recommend using it in a production environment nor start building applications with it yet, as there will be still major changes made.
 
-###Browser compatibility###
+### Browser compatibility ###
 
 The script should work fine on the following browsers:
 
