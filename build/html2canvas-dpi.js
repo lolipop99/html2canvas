@@ -1,5 +1,5 @@
 /*
-  html2canvas 0.4.1 <http://html2canvas.hertzen.com>
+  html2canvas-dpi 0.4.3 <http://html2canvas.hertzen.com>
   Copyright (c) 2020 Niklas von Hertzen
 
   Released under MIT License
@@ -1557,9 +1557,19 @@ _html2canvas.Parse = function (images, options) {
     brh = borderRadius[2][0],
     brv = borderRadius[2][1],
     blh = borderRadius[3][0],
-    blv = borderRadius[3][1],
+    blv = borderRadius[3][1];
 
-    topWidth = width - trh,
+    var halfHeight = Math.floor(height / 2);
+    tlh = tlh > halfHeight ? halfHeight : tlh;
+    tlv = tlv > halfHeight ? halfHeight : tlv;
+    trh = trh > halfHeight ? halfHeight : trh;
+    trv = trv > halfHeight ? halfHeight : trv;
+    brh = brh > halfHeight ? halfHeight : brh;
+    brv = brv > halfHeight ? halfHeight : brv;
+    blh = blh > halfHeight ? halfHeight : blh;
+    blv = blv > halfHeight ? halfHeight : blv;
+
+    var topWidth = width - trh,
     rightHeight = height - brv,
     bottomWidth = width - brh,
     leftHeight = height - blv;
@@ -1827,6 +1837,9 @@ _html2canvas.Parse = function (images, options) {
         Util.log(['Tried to assign readonly property ', prop, 'Error:', e]);
       }
     });
+
+    elps.style['fontFamily'] = elStyle['fontFamily'];
+    elps.style['font-family'] = elStyle['font-family'];
 
     if(isImage) {
       elps.src = Util.parseBackgroundImage(content)[0].args[0];
