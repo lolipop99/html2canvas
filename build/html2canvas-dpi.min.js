@@ -1,5 +1,5 @@
 /*
-  html2canvas-dpi 0.4.3 <http://html2canvas.hertzen.com>
+  html2canvas-dpi 0.4.4 <http://html2canvas.hertzen.com>
   Copyright (c) 2020 Niklas von Hertzen
 
   Released under MIT License
