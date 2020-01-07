@@ -101,7 +101,11 @@ If you wish to contribute to the project, please send the pull requests to the d
 
 ### Changelog ###
 
-v0.4.2 - 7.1.2020
+v0.4.4 - 7.1.2020
+ * Applied Grom-S's fix for large border radius values
+ * Fixed sudo element font-families (ie: FontAwesome)
+
+v0.4.3 - 7.1.2020
  * Added scale and dpi canvas render functionality
 
 v0.4.1 - 7.9.2013
