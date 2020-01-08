@@ -101,6 +101,9 @@ If you wish to contribute to the project, please send the pull requests to the d
 
 ### Changelog ###
 
+v0.4.5 - 8.1.2020
+ * Fixed issue where background option was getting bypassed
+
 v0.4.4 - 7.1.2020
  * Applied Grom-S's fix for large border radius values
  * Fixed sudo element font-families (ie: FontAwesome)
