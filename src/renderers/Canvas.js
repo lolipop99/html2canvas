@@ -65,20 +65,56 @@ _html2canvas.Renderer.Canvas = function(options) {
     }
   }
 
+  function getBrowserInfo() {
+    var ua= navigator.userAgent, tem,
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return ['IE', (tem[1] || '')];
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\b(OPR|Edge?)\/(\d+)/);
+        if(tem!= null) {
+          var stem = tem.slice(1);
+          stem[0].replace('OPR', 'Opera').replace('Edg ', 'Edge ');
+          return stem;
+        }
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return M;
+  }
+
+  function getBrowserCanvasLimit(scale) {
+    var browser = getBrowserInfo()[0];
+    var scaleLimit = function(val) { return Math.floor(val / scale) };
+    var restrictions = {
+      DEFAULT: { width: scaleLimit(8192), height: scaleLimit(8192) },
+      Edge: { width: scaleLimit(8192), height: scaleLimit(8192) },
+      Firefox: { width: scaleLimit(32767), height: scaleLimit(32767) },
+      Chrome: { width: scaleLimit(32767), height: scaleLimit(32767) }
+    }
+
+    return [restrictions[browser] || restrictions['DEFAULT'], browser]
+  }
+
   return function(parsedData, options, document, queue, _html2canvas) {
     var ctx = canvas.getContext("2d"),
-    newCanvas,
-    bounds,
-    boundScaleKeys,
-    fstyle,
-    zStack = parsedData.stack;
+      newCanvas,
+      bounds,
+      boundScaleKeys,
+      fstyle,
+      zStack = parsedData.stack;
 
     if (options.dpi) {
       options.scale = options.dpi / 96;
     }
 
-    canvas.width = canvas.style.width =  (options.width || zStack.ctx.width) * options.scale;
-    canvas.height = canvas.style.height = (options.height || zStack.ctx.height) * options.scale;
+    var browserCanvasLimit = getBrowserCanvasLimit(options.scale);
+    var canvasLimit = browserCanvasLimit[0];
+
+    canvas.width = Math.min(canvas.style.width =  (options.width || zStack.ctx.width) * options.scale, canvasLimit.width);
+    canvas.height = Math.min(canvas.style.height = (options.height || zStack.ctx.height) * options.scale, canvasLimit.height);
 
     fstyle = ctx.fillStyle;
     ctx.scale(options.scale, options.scale);
