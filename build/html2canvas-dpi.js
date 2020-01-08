@@ -1,5 +1,5 @@
 /*
-  html2canvas-dpi 0.4.6 <http://html2canvas.hertzen.com>
+  html2canvas-dpi 0.4.7 <http://html2canvas.hertzen.com>
   Copyright (c) 2020 Niklas von Hertzen
 
   Released under MIT License
@@ -2845,6 +2845,7 @@ _html2canvas.Renderer.Canvas = function(options) {
       DEFAULT: { width: scaleLimit(8192), height: scaleLimit(8192) },
       Edge: { width: scaleLimit(8192), height: scaleLimit(8192) },
       Firefox: { width: scaleLimit(32767), height: scaleLimit(32767) },
+      Safari: { width: scaleLimit(32767), height: scaleLimit(32767) },
       Chrome: { width: scaleLimit(32767), height: scaleLimit(32767) }
     }
 
@@ -2866,8 +2867,8 @@ _html2canvas.Renderer.Canvas = function(options) {
     var browserCanvasLimit = getBrowserCanvasLimit(options.scale);
     var canvasLimit = browserCanvasLimit[0];
 
-    canvas.width = Math.min(canvas.style.width =  (options.width || zStack.ctx.width) * options.scale, canvasLimit.width);
-    canvas.height = Math.min(canvas.style.height = (options.height || zStack.ctx.height) * options.scale, canvasLimit.height);
+    canvas.width = canvas.style.width = Math.min((options.width || zStack.ctx.width) * options.scale, canvasLimit.width);
+    canvas.height = canvas.style.height = Math.min((options.height || zStack.ctx.height) * options.scale, canvasLimit.height);
 
     fstyle = ctx.fillStyle;
     ctx.scale(options.scale, options.scale);

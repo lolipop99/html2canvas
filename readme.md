@@ -101,6 +101,9 @@ If you wish to contribute to the project, please send the pull requests to the d
 
 ### Changelog ###
 
+v0.4.7 - 8.1.2020
+ * Added Safari canvas limitation numbers
+
 v0.4.6 - 8.1.2020
  * Fixed blank capture and NS_ERROR_FAILURE issues in Chrome and Firefox when canvas size exceeds browser limitations.
 

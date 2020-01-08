@@ -18,3 +18,4 @@ chromedriver.log
 *.iml
 .idea/
 .DS_Store
+npm-debug.log
