@@ -158,12 +158,13 @@ _html2canvas.Renderer.Canvas = function(options) {
         boundScaleKeys = ['width', 'height', 'top', 'left'];
 
         boundScaleKeys.forEach(function(key) {
-          bounds[key] = bounds[key] * options.scale;
+          var limitKey = ['width', 'left'].indexOf(key) === -1 ? 'height' : 'width';
+          bounds[key] = Math.min(bounds[key] * options.scale, canvasLimit[limitKey]);
         });
 
         newCanvas = document.createElement('canvas');
-        newCanvas.width = Math.ceil(bounds.width);
-        newCanvas.height = Math.ceil(bounds.height);
+        newCanvas.width = Math.min(bounds.width, canvasLimit.width);
+        newCanvas.height = Math.min(bounds.height, canvasLimit.height);
         newCanvas.style.width = newCanvas.width + 'px';
         newCanvas.style.height = newCanvas.height + 'px';
 
