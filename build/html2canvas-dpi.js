@@ -1,5 +1,5 @@
 /*
-  html2canvas-dpi 0.4.8 <http://html2canvas.hertzen.com>
+  html2canvas-dpi 0.4.9 <http://html2canvas.hertzen.com>
   Copyright (c) 2020 Niklas von Hertzen
 
   Released under MIT License
@@ -2840,13 +2840,12 @@ _html2canvas.Renderer.Canvas = function(options) {
 
   function getBrowserCanvasLimit(scale) {
     var browser = getBrowserInfo()[0];
-    var scaleLimit = function(val) { return Math.floor(val / scale) };
     var restrictions = {
-      DEFAULT: { width: scaleLimit(8192), height: scaleLimit(8192) },
-      Edge: { width: scaleLimit(8192), height: scaleLimit(8192) },
-      Firefox: { width: scaleLimit(32767), height: scaleLimit(32767) },
-      Safari: { width: scaleLimit(32767), height: scaleLimit(32767) },
-      Chrome: { width: scaleLimit(32767), height: scaleLimit(32767) }
+      DEFAULT: { width: 8192, height: 8192 },
+      Edge: { width: 8192, height: 8192 },
+      Firefox: { width: 32767, height: 32767 },
+      Safari: { width: 32767, height: 32767 },
+      Chrome: { width: 32767, height: 32767 }
     }
 
     return [restrictions[browser] || restrictions['DEFAULT'], browser]

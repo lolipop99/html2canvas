@@ -101,6 +101,9 @@ If you wish to contribute to the project, please send the pull requests to the d
 
 ### Changelog ###
 
+v0.4.9 - 9.1.2020
+ * Removed browser restriction scale application as it's not required
+
 v0.4.8 - 9.1.2020
  * Fixed issue where element bounds weren't being scaled, causing IndexSizeError in IE
 

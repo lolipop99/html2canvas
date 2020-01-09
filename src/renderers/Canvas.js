@@ -87,13 +87,12 @@ _html2canvas.Renderer.Canvas = function(options) {
 
   function getBrowserCanvasLimit(scale) {
     var browser = getBrowserInfo()[0];
-    var scaleLimit = function(val) { return Math.floor(val / scale) };
     var restrictions = {
-      DEFAULT: { width: scaleLimit(8192), height: scaleLimit(8192) },
-      Edge: { width: scaleLimit(8192), height: scaleLimit(8192) },
-      Firefox: { width: scaleLimit(32767), height: scaleLimit(32767) },
-      Safari: { width: scaleLimit(32767), height: scaleLimit(32767) },
-      Chrome: { width: scaleLimit(32767), height: scaleLimit(32767) }
+      DEFAULT: { width: 8192, height: 8192 },
+      Edge: { width: 8192, height: 8192 },
+      Firefox: { width: 32767, height: 32767 },
+      Safari: { width: 32767, height: 32767 },
+      Chrome: { width: 32767, height: 32767 }
     }
 
     return [restrictions[browser] || restrictions['DEFAULT'], browser]
